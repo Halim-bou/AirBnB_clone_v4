@@ -50,10 +50,12 @@ button:hover {
     height: 100%;
     width: 25%;
 }
-
+.amenities h4 {
+    white-space: nowrap;
+}
 .popover {
     visibility: hidden;
-    width: 100%;
+    width: 250px;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     background: #FAFAFA;
@@ -62,6 +64,7 @@ button:hover {
     overflow-y: scroll;
     scrollbar-width: none;
     max-height: 300px;
+    white-space: nowrap;
 }
 
 .popover::-webkit-scrollbar{
