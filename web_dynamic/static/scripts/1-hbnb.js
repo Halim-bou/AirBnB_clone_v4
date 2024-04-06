@@ -17,7 +17,10 @@ function start () {
         amenityNames.splice(indexId, 1);
       }
     }
-    // console.log(amenityNames);
-    $('.amenities h4').text(amenityNames.join(', '));
+    if (amenityNames.length === 0) {
+      $('.amenities h4').html('&nbsp;');
+    } else {
+      $('.amenities h4').text(amenityNames.join(', '));
+    }
   });
 }
