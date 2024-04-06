@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='4-common.css') }}?{{ cache_id }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='3-footer.css') }}?{{ cache_id }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='3-header.css') }}?{{ cache_id }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='6-filters.css') }}?{{ cache_id }}">
-    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='8-places.css') }}?{{ cache_id }}">
+	  <meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/4-common.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/3-footer.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/3-header.css') }}?{{ cache_id }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='/styles/6-filters.css') }}?{{ cache_id }}">
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='/styles/8-places.css') }}?{{ cache_id }}">
     <link rel="icon" href="../static/images/icon.png" />
+	<script src="{{ url_for('static', filename='/scripts/1-hbnb.js') }}?{{ cache_id }}"></script>
     <title>HBnB</title>
   </head>
   <body>
@@ -40,7 +42,7 @@
 	  <div class="popover">
 	    <ul>
 	      {% for amenity in amenities %}
-	      <li>{{ amenity.name }}</li>
+	      <li><input type="checkbox" data-id="{{ amenity.id }}" data-name="{{ amenity.name }}">{{ amenity.name }}</li>
 	      {% endfor %}
 	    </ul>
 	  </div>
