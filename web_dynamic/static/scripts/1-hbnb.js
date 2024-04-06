@@ -8,7 +8,7 @@ $(document).ready(function () {
     if ($(this).is(':checked')) {
       $amenityIds.push(amenityId);
       $amenityNames.push(amenityName);
-      console.log("added" + amenityId)
+      // console.log("added" + amenityId)
     } else {
       const index = $amenityIds.indexOf(amenityId);
       const indexName = $amenityNames.indexOf(amenityName)
@@ -16,17 +16,17 @@ $(document).ready(function () {
         $amenityIds.splice(index, 1);
         $amenityNames.splice(indexName, 1);
       }
-      console.log("removed" + amenityId)
+      // console.log("removed" + amenityId)
     }
     updateAmenitiesList();
   });
   function updateAmenitiesList () {
     const amenitiesList = $amenityNames.join(', ');
-    var maxLength = 30;
-    console.log(amenitiesList);
+    const maxLength = 37;
+    // console.log(amenitiesList);
     if (amenitiesList.length === 0) {
       $('.amenities h4').html('&nbsp;');
-    }else if (amenitiesList.length > 0 && amenitiesList.length > maxLength) {
+    } else if (amenitiesList.length > 0 && amenitiesList.length > maxLength) {
       $('.amenities h4').text(amenitiesList.substring(0, maxLength) + '...');
     } else {
       $('.amenities h4').text(amenitiesList.substring(0, maxLength));
