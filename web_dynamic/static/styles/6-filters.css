@@ -46,7 +46,9 @@ button:hover {
     width: 25%;
     border-right: 1px solid #DDDDDD;
 }
+
 .amenities {
+    /* This is the cause of the problem in task 2 */
     height: 100%;
     width: 25%;
 }
@@ -104,3 +106,11 @@ button:hover {
 .locations:hover .popover {
     visibility: visible;
 }
+
+/* .amenities h4 {
+    white-space: nowrap; 
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-top: 4px;
+} */
