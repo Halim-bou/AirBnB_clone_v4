@@ -26,8 +26,10 @@ $(document).ready(function () {
     console.log(amenitiesList);
     if (amenitiesList.length === 0) {
       $('.amenities h4').html('&nbsp;');
-    }else {
+    }else if (amenitiesList.length > 0 && amenitiesList.length > maxLength) {
       $('.amenities h4').text(amenitiesList.substring(0, maxLength) + '...');
+    } else {
+      $('.amenities h4').text(amenitiesList.substring(0, maxLength));
     }
   }
 });
