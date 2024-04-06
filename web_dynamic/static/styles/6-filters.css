@@ -55,7 +55,7 @@ button:hover {
 
 .popover {
     visibility: hidden;
-    width: 100%;
+    width: 250px;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     background: #FAFAFA;
@@ -106,8 +106,6 @@ button:hover {
 
 .amenities h4 {
     white-space: nowrap; 
-    /* width: 100%;  */
     overflow: hidden;
     text-overflow: ellipsis;
-    padding-top: 4px;
 }
