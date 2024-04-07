@@ -55,7 +55,7 @@ button:hover {
 
 .popover {
     visibility: hidden;
-    width: 250px;
+    width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     background: #FAFAFA;
