@@ -70,18 +70,19 @@ function appendToSection (place) {
   if (place.max_guest !== 1) { guestS += 's'; }
   if (place.number_rooms !== 1) { roomS += 's'; }
   if (place.number_bathrooms !== 1) { bathroomS += 's'; }
-  $('section.places').append('<article>\
-  <div class="title_box">\
-  <h2>' + place.name + '</h2>\
-  <div class="price_by_night">$' + place.price_by_night + '</div>\
-  </div>\
-  <div class="information">\
-    <div class="max_guest">' + place.max_guest + guestS + '</div>\
-          <div class="number_rooms">' + place.number_rooms + roomS + '</div>\
-          <div class="number_bathrooms">' + place.number_bathrooms + bathroomS + '</div>\
-</div>\
-    <div class="description">' + place.description + '</div>\
-  </acrticle>');
+  $('section.places').append(`
+  <article>
+  <div class="title_box">
+  <h2>${place.name}</h2>
+  <div class="price_by_night">$${place.price_by_night}</div>
+  </div>
+  <div class="information">
+    <div class="max_guest">${place.max_guest} ${guestS}</div>
+          <div class="number_rooms">${place.number_rooms} ${roomS}</div>
+          <div class="number_bathrooms">${place.number_bathrooms} ${bathroomS}</div>
+</div>
+    <div class="description">${place.description}</div>
+  </acrticle>`);
 }
 
 function checkStateCity () {

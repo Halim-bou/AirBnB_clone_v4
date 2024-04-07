@@ -101,10 +101,10 @@ function appendToSection (place) {
   </div>
   <div class="information">
     <div class="max_guest">${place.max_guest} ${guestS}</div>
-          <div class="number_rooms">${place.number_rooms} + ${roomS}</div>
+          <div class="number_rooms">${place.number_rooms} ${roomS}</div>
           <div class="number_bathrooms">${place.number_bathrooms} ${bathroomS}</div>
 </div>
-    <div class="description">${place.description}</div>
+    <div class="description"><p>${place.description}</p></div>
     <div class="reviews">
     <h2>Reviews <span class="toggle_btn1" place-id="${place.id}">(show)</span></h2>
     </div>

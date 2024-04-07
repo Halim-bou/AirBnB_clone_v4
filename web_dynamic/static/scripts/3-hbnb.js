@@ -17,27 +17,25 @@ function makePlaces () {
     }
   });
 }
+
 // This function create a new element for place.
 function appendArticle (place) {
-  const guest = place.max_guest !== 1 ? 'Guests' : 'Guest';
-  const room = place.number_rooms !== 1 ? 'Bedrooms' : 'Bedroom';
-  const bathroom = place.number_bathrooms !== 1 ? 'Bathrooms' : 'Bathroom';
-  $('.places').append('<article>' +
-    '<div class="title_box">' +
-      '<h2>' + place.name + '</h2>' +
-      '<div class="price_by_night">$' + place.price_by_night + '</div>' +
-    '</div>' +
-    '<div class="information">' +
-      '<div class="max_guest">' + place.max_guest + guest + '</div>' +
-      '<div class="number_rooms">' + place.number_rooms + room + '</div>' +
-      '<div class="number_bathrooms">' + place.number_bathrooms + bathroom + '</div>' +
-    '</div>' +
-    '<div class="user">' +
-    '</div>' +
-    '<div class="description">' +
-    '<p>' + place.description + '</p>' +
-    '</div>' +
-  '</article>');
+  const guestS = place.max_guest !== 1 ? 'Guests' : 'Guest';
+  const roomS = place.number_rooms !== 1 ? 'Bedrooms' : 'Bedroom';
+  const bathroomS = place.number_bathrooms !== 1 ? 'Bathrooms' : 'Bathroom';
+  $('section.places').append(`
+  <article>
+  <div class="title_box">
+  <h2>${place.name}</h2>
+  <div class="price_by_night">$${place.price_by_night}</div>
+  </div>
+  <div class="information">
+    <div class="max_guest">${place.max_guest} ${guestS}</div>
+          <div class="number_rooms">${place.number_rooms} ${roomS}</div>
+          <div class="number_bathrooms">${place.number_bathrooms} ${bathroomS}</div>
+</div>
+    <div class="description"><p>${place.description}</p></div>
+  </acrticle>`);
 }
 
 /* this function will check the status (api/v1/views/index) */
