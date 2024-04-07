@@ -3,22 +3,21 @@ $(document).ready(function () {
   avalability();
 });
 
-
 /* this function will check the status (api/v1/views/index) */
-function avalability() {
+function avalability () {
   $.ajax({
     type: 'GET',
     url: 'http://0.0.0.0:5001/api/v1/status',
     success: function (data) {
       if (data.status === 'OK') {
         console.log('add');
-        $('div#api_status').addClass('available')
+        $('div#api_status').addClass('available');
       } else {
         console.log('remove');
-        $('div#api_status').removeClass('available')
+        $('div#api_status').removeClass('available');
       }
     }
-  })
+  });
 }
 
 /* this function keeps track of the changes happening in the check boxes */

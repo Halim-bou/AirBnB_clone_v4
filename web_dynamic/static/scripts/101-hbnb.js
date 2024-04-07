@@ -9,10 +9,33 @@ $(document).ready(function () {
   makePlaces();
   checkStateCity();
   $('button[type="button"]').on('click', makePlaces);
+  manageReviews();
 });
 
+/* This function will display or hide the reviews of a place */
+function manageReviews () {
+  $(document).on('click', '.toggle_btn1', function () {
+    const placeId = $(this).attr('place-id'); /* the place id */
+    if ($(this).text() === '(show)') {
+      $(this).text('(hide)');
+      $.ajax({
+        type: 'Get',
+        url: 'http://0.0.0.0:5001/api/v1/places/' + placeId + '/reviews',
+        success: function (reviews) {
+          for (const review of reviews) {
+            $('div#' + placeId).append(review.text + '<br><br>');
+          }
+        }
+      });
+    } else {
+      $(this).text('(show)');
+      $('div#' + placeId).empty();
+    }
+  });
+}
+
+/* This function will create the places articles */
 function makePlaces () {
-  console.log('run');
   $.ajax({
     type: 'Post',
     url: 'http://0.0.0.0:5001/api/v1/places_search',
@@ -70,30 +93,36 @@ function appendToSection (place) {
   if (place.max_guest !== 1) { guestS += 's'; }
   if (place.number_rooms !== 1) { roomS += 's'; }
   if (place.number_bathrooms !== 1) { bathroomS += 's'; }
-  $('section.places').append('<article>\
-  <div class="title_box">\
-  <h2>' + place.name + '</h2>\
-  <div class="price_by_night">$' + place.price_by_night + '</div>\
-  </div>\
-  <div class="information">\
-    <div class="max_guest">' + place.max_guest + guestS + '</div>\
-          <div class="number_rooms">' + place.number_rooms + roomS + '</div>\
-          <div class="number_bathrooms">' + place.number_bathrooms + bathroomS + '</div>\
-</div>\
-    <div class="description">' + place.description + '</div>\
-  </acrticle>');
+  $('section.places').append(`
+  <article>
+  <div class="title_box">
+  <h2>${place.name}</h2>
+  <div class="price_by_night">$${place.price_by_night}</div>
+  </div>
+  <div class="information">
+    <div class="max_guest">${place.max_guest} ${guestS}</div>
+          <div class="number_rooms">${place.number_rooms} + ${roomS}</div>
+          <div class="number_bathrooms">${place.number_bathrooms} ${bathroomS}</div>
+</div>
+    <div class="description">${place.description}</div>
+    <div class="reviews">
+    <h2>Reviews <span class="toggle_btn1" place-id="${place.id}">(show)</span></h2>
+    </div>
+    <div class="place_reviews" id="${place.id}"></div>
+  </acrticle>
+`);
 }
 
 function checkStateCity () {
   $(document).on('change', '.state_checkbox', function () {
     if ($(this).is(':checked')) {
-      console.log('state checked');
+      // console.log("state checked")
       stateIds.push($(this).attr('data-id'));
       stateNames.push($(this).attr('data-name'));
     } else {
       const indexId = stateIds.indexOf($(this).attr('data-id'));
       if (indexId !== -1) {
-        console.log('state unchecked');
+        // console.log("state unchecked")
         stateIds.splice(indexId, 1);
         stateNames.splice(indexId, 1);
       }
@@ -108,13 +137,13 @@ function checkStateCity () {
   });
   $(document).on('change', '.city_checkbox', function () {
     if ($(this).is(':checked')) {
-      console.log('city checked');
+      // console.log("city checked")
       cityIds.push($(this).attr('data-id'));
       cityNames.push($(this).attr('data-name'));
     } else {
       const indexId = cityIds.indexOf($(this).attr('data-id'));
       if (indexId !== -1) {
-        console.log('city unchecked');
+        // console.log("city unchecked")
         cityIds.splice(indexId, 1);
         cityNames.splice(indexId, 1);
       }

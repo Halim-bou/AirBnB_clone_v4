@@ -6,35 +6,35 @@ $(document).ready(function () {
   $('button[type="button"]').on('click', makePlaces);
 });
 
-function makePlaces() {
-  console.log("run")
+function makePlaces () {
+  console.log('run');
   $.ajax({
     type: 'Post',
     url: 'http://0.0.0.0:5001/api/v1/places_search',
     contentType: 'application/json',
-    data: JSON.stringify({amenities: amenityIds}),
+    data: JSON.stringify({ amenities: amenityIds }),
     success: function (places) {
-      $('section.places').empty()
-      for (let place of places) {
+      $('section.places').empty();
+      for (const place of places) {
         appendToSection(place);
       }
     }
-  })
+  });
 }
 
 /* this function will check the status (api/v1/views/index) */
-function avalability() {
+function avalability () {
   $.ajax({
     type: 'GET',
     url: 'http://0.0.0.0:5001/api/v1/status',
     success: function (data) {
       if (data.status === 'OK') {
-        $('div#api_status').addClass('available')
+        $('div#api_status').addClass('available');
       } else {
-        $('div#api_status').removeClass('available')
+        $('div#api_status').removeClass('available');
       }
     }
-  })
+  });
 }
 
 /* this function keeps track of the changes happening in the check boxes */
@@ -60,11 +60,11 @@ function start () {
   });
 }
 
-function appendToSection(place) {
-  let guestS = ' Guest', roomS = ' Bedroom', bathroomS = ' Bathroom';
-  if (place.max_guest !== 1) { guestS += 's' }
-  if (place.number_rooms !== 1) { roomS += 's' }
-  if (place.number_bathrooms !== 1) { bathroomS += 's' }
+function appendToSection (place) {
+  let guestS = ' Guest'; let roomS = ' Bedroom'; let bathroomS = ' Bathroom';
+  if (place.max_guest !== 1) { guestS += 's'; }
+  if (place.number_rooms !== 1) { roomS += 's'; }
+  if (place.number_bathrooms !== 1) { bathroomS += 's'; }
   $('section.places').append('<article>\
   <div class="title_box">\
   <h2>' + place.name + '</h2>\
