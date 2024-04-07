@@ -1,8 +1,4 @@
 #!/usr/bin/python3
-<<<<<<< HEAD
-=======
-#!/usr/bin/python3
->>>>>>> radouane
 """ Starts a Flash Web Application """
 from models import storage
 from models.state import State
@@ -46,8 +42,4 @@ def hbnb():
 
 if __name__ == "__main__":
     """ Main Function """
-<<<<<<< HEAD
     app.run(host='0.0.0.0', port=5000, debug=True)
-=======
-    app.run(host='0.0.0.0', port=5000, debug=True)
->>>>>>> radouane
