@@ -1,43 +1,25 @@
+const amenityIds = [];
 $(document).ready(function () {
   start();
   avalability();
   makePlaces();
+  $('button[type="button"]').on('click', makePlaces);
 });
 
 function makePlaces() {
+  console.log("run")
   $.ajax({
     type: 'Post',
     url: 'http://0.0.0.0:5001/api/v1/places_search',
     contentType: 'application/json',
-    data: JSON.stringify({}),
+    data: JSON.stringify({amenities: amenityIds}),
     success: function (places) {
+      $('section.places').empty()
       for (let place of places) {
-        appendArticle(place);
+        appendToSection(place);
       }
     }
-  });
-};
-// This function create a new element for place.
-function appendArticle(place) {
-  let guest = place.max_guest !== 1 ? 'Guests' : 'Guest';
-  let room = place.number_rooms !== 1 ? 'Bedrooms' : 'Bedroom';
-  let bathroom = place.number_bathrooms !== 1 ? 'Bathrooms' : 'Bathroom';
-  $('.places').append('<article>' +
-    '<div class="title_box">' +
-      '<h2>'+place.name+'</h2>' +
-      '<div class="price_by_night">$'+place.price_by_night+'</div>' +
-    '</div>' +
-    '<div class="information">' +
-      '<div class="max_guest">'+ place.max_guest + guest +'</div>' +
-      '<div class="number_rooms">'+ place.number_rooms + room +'</div>' +
-      '<div class="number_bathrooms">'+ place.number_bathrooms + bathroom +'</div>' +
-    '</div>' +
-    '<div class="user">' +
-    '</div>' +
-    '<div class="description">' +
-    '<p>'+ place.description + '</p>' +
-    '</div>' +
-  '</article>');
+  })
 }
 
 /* this function will check the status (api/v1/views/index) */
@@ -47,10 +29,8 @@ function avalability() {
     url: 'http://0.0.0.0:5001/api/v1/status',
     success: function (data) {
       if (data.status === 'OK') {
-        console.log('add');
         $('div#api_status').addClass('available')
       } else {
-        console.log('remove');
         $('div#api_status').removeClass('available')
       }
     }
@@ -59,7 +39,6 @@ function avalability() {
 
 /* this function keeps track of the changes happening in the check boxes */
 function start () {
-  const amenityIds = [];
   const amenityNames = [];
 
   $(document).on('change', 'input[type="checkbox"]', function () {
@@ -79,4 +58,23 @@ function start () {
       $('.amenities h4').text(amenityNames.join(', '));
     }
   });
+}
+
+function appendToSection(place) {
+  let guestS = ' Guest', roomS = ' Bedroom', bathroomS = ' Bathroom';
+  if (place.max_guest !== 1) { guestS += 's' }
+  if (place.number_rooms !== 1) { roomS += 's' }
+  if (place.number_bathrooms !== 1) { bathroomS += 's' }
+  $('section.places').append('<article>\
+  <div class="title_box">\
+  <h2>' + place.name + '</h2>\
+  <div class="price_by_night">$' + place.price_by_night + '</div>\
+  </div>\
+  <div class="information">\
+    <div class="max_guest">' + place.max_guest + guestS + '</div>\
+          <div class="number_rooms">' + place.number_rooms + roomS + '</div>\
+          <div class="number_bathrooms">' + place.number_bathrooms + bathroomS + '</div>\
+</div>\
+    <div class="description">' + place.description + '</div>\
+  </acrticle>');
 }
